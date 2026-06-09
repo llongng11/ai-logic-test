@@ -1,0 +1,24 @@
+{
+  "policy_id": "POL-PAPAYA-2024",
+  "effective_date": "2024-01-01",
+  "annual_limit": 100000,
+  "deductible": 1000,
+  "benefits": {
+    "OUTPATIENT": {
+      "per_visit_limit": 3000,
+      "copay_percentage": 0.2,
+      "waiting_period_days": 0
+    },
+    "INPATIENT": {
+      "per_visit_limit": 50000,
+      "copay_percentage": 0.0,
+      "waiting_period_days": 30
+    },
+    "DENTAL": {
+      "per_visit_limit": 2000,
+      "copay_percentage": 0.1,
+      "waiting_period_days": 90
+    }
+  },
+  "exclusions": ["Cosmetic Surgery", "Aesthetics"]
+}

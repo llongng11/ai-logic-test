@@ -1,0 +1,162 @@
+[
+  {
+    "expense_id": "EXP-001",
+    "date": "2024-01-05",
+    "benefit_type": "OUTPATIENT",
+    "amount": 800,
+    "diagnosis": "Common Cold",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-002",
+    "date": "2024-01-10",
+    "benefit_type": "OUTPATIENT",
+    "amount": 500,
+    "diagnosis": "Fever",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-003",
+    "date": "2024-01-15",
+    "benefit_type": "INPATIENT",
+    "amount": 15000,
+    "diagnosis": "Appendicitis",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-004",
+    "date": "2024-01-20",
+    "benefit_type": "DENTAL",
+    "amount": 1200,
+    "diagnosis": "Tartar",
+    "provider": "DentalCare"
+  },
+  {
+    "expense_id": "EXP-005",
+    "date": "2024-01-25",
+    "benefit_type": "OUTPATIENT",
+    "amount": 4000,
+    "diagnosis": "Cosmetic Surgery",
+    "provider": "Beauty Clinic"
+  },
+  {
+    "expense_id": "EXP-006",
+    "date": "2024-02-15",
+    "benefit_type": "INPATIENT",
+    "amount": 30000,
+    "diagnosis": "Pneumonia",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-007",
+    "date": "2024-02-28",
+    "benefit_type": "OUTPATIENT",
+    "amount": 2500,
+    "diagnosis": "Migraine",
+    "provider": "Samitivej Hospital"
+  },
+  {
+    "expense_id": "EXP-008",
+    "date": "2024-03-05",
+    "benefit_type": "OUTPATIENT",
+    "amount": 4500,
+    "diagnosis": "Diabetes check",
+    "provider": "Samitivej Hospital"
+  },
+  {
+    "expense_id": "EXP-009",
+    "date": "2024-04-10",
+    "benefit_type": "DENTAL",
+    "amount": 1500,
+    "diagnosis": "Tooth decay",
+    "provider": "DentalCare"
+  },
+  {
+    "expense_id": "EXP-010",
+    "date": "2024-04-15",
+    "benefit_type": "DENTAL",
+    "amount": 3500,
+    "diagnosis": "Pulpitis",
+    "provider": "DentalCare"
+  },
+  {
+    "expense_id": "EXP-011",
+    "date": "2024-05-01",
+    "benefit_type": "INPATIENT",
+    "amount": 45000,
+    "diagnosis": "Heart Issue",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-012",
+    "date": "2024-06-01",
+    "benefit_type": "OUTPATIENT",
+    "amount": 2000,
+    "diagnosis": "Back pain",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-013",
+    "date": "2024-07-01",
+    "benefit_type": "OUTPATIENT",
+    "amount": 1500,
+    "diagnosis": "Back pain",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-014",
+    "date": "2024-08-01",
+    "benefit_type": "DENTAL",
+    "amount": 1000,
+    "diagnosis": "Gingivitis",
+    "provider": "DentalCare"
+  },
+  {
+    "expense_id": "EXP-015",
+    "date": "2024-09-01",
+    "benefit_type": "INPATIENT",
+    "amount": 20000,
+    "diagnosis": "Injury",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-016",
+    "date": "2024-10-01",
+    "benefit_type": "OUTPATIENT",
+    "amount": 1000,
+    "diagnosis": "Flu",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-017",
+    "date": "2024-10-15",
+    "benefit_type": "INPATIENT",
+    "amount": 5000,
+    "diagnosis": "Fever",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-018",
+    "date": "2024-11-01",
+    "benefit_type": "DENTAL",
+    "amount": 1500,
+    "diagnosis": "Toothache",
+    "provider": "DentalCare"
+  },
+  {
+    "expense_id": "EXP-019",
+    "date": "2024-11-20",
+    "benefit_type": "OUTPATIENT",
+    "amount": 2000,
+    "diagnosis": "Allergy",
+    "provider": "MedClinic"
+  },
+  {
+    "expense_id": "EXP-020",
+    "date": "2024-12-25",
+    "benefit_type": "OUTPATIENT",
+    "amount": 3000,
+    "diagnosis": "Headache",
+    "provider": "MedClinic"
+  }
+]
