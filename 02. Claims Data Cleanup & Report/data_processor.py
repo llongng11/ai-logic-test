@@ -170,9 +170,10 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
     }
 
     vietnamese_status = {
-        "APPROVED": "ĐÃ DUYỆT",
-        "DENIED": "TỪ CHỐI",
-        "PARTIALLY_COVERED": "DUYỆT MỘT PHẦN"
+        "APPROVED": "ĐÃ DUYỆT (APPROVED)",
+        "REJECTED": "TỪ CHỐI (REJECTED)",
+        "PENDING": "ĐANG XỬ LÝ (PENDING)",
+        "IN_REVIEW": "ĐANG XEM XÉT (IN_REVIEW)"
     }
 
     vietnamese_types = {
