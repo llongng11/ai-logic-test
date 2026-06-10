@@ -4,11 +4,11 @@
 
 ### Các câu hỏi được chọn: (sau đây xin được đánh số từ Q1 đến Q5 để tiện sử dụng ở những phần sau)
 
-Q1 - Thiết kế cánh cửa ra vào tốt nhất cho nhà vệ sinh nam công cộng. [Observation, Design]
-Q2 - Vị trí ngồi nào tốt nhất trên xe buýt? [Observation, Giving]
-Q3 - Viết hướng dẫn đổ xăng tại cây xăng nhanh nhất có thể. [Critical thinking, IQ]
-Q4 - Lần cuối bạn bỏ quên một món đồ là khi nào? Đồ gì? [Memory, Observation]
-Q5 - Người bán hàng nào dễ chịu nhất? [Observation]
+* Q1 - Thiết kế cánh cửa ra vào tốt nhất cho nhà vệ sinh nam công cộng. [Observation, Design]
+* Q2 - Vị trí ngồi nào tốt nhất trên xe buýt? [Observation, Giving]
+* Q3 - Viết hướng dẫn đổ xăng tại cây xăng nhanh nhất có thể. [Critical thinking, IQ]
+* Q4 - Lần cuối bạn bỏ quên một món đồ là khi nào? Đồ gì? [Memory, Observation]
+* Q5 - Người bán hàng nào dễ chịu nhất? [Observation]
 
 ### Lý do được chọn:
 
