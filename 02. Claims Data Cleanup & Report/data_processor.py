@@ -88,7 +88,7 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
         except ValueError:
             continue  
             
-        # Chuẩn hóa chữ
+        # Chuẩn hóa Tên KH
         member_name = member_name.title()
         
         # Chuẩn hóa Claim Type
@@ -110,8 +110,9 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
         # Chuẩn hóa Ngày tháng
         clean_date = parse_dirty_date(submitted_date)
         if clean_date == "INVALID_DATE":
-            clean_date = "2024-03-15"  # Fallback ngày hệ thống
-            
+            # Lấy ngày hôm nay và định dạng ngay về chuỗi chuẩn YYYY-MM-DD
+            clean_date = datetime.today().strftime("%Y-%m-%d")
+
         normalized_rows.append((claim_id, policy_id, member_name, norm_type, diagnosis_clean, int(clean_amount), currency_upper, clean_date, status))
 
 

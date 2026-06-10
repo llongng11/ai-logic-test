@@ -6,7 +6,7 @@ def generate_dirty_dataset(filename="claims_dirty.csv"):
     Sinh ra file dữ liệu bảo hiểm CHÍNH XÁC 500 DÒNG (bao gồm cả dòng lỗi và dòng trùng lặp).
     Tỷ lệ phân bổ các giá trị lỗi được chia đều để tăng tính thử thách cho bài toán.
     """
-    random.seed(42)  # Đảm bảo dữ liệu sinh ra cố định mỗi lần chạy
+    # random.seed(42)  # Đảm bảo dữ liệu sinh ra cố định mỗi lần chạy
     
     diagnoses_pool = ["Flu", "Acute bronchitis", "Gastritis", "Migraine", "Back pain", "Appendicitis", "Allergy", "Toothache"]
     claim_types_pool = ["OUTPATIENT", "INPATIENT", "DENTAL"]
@@ -66,7 +66,7 @@ def generate_dirty_dataset(filename="claims_dirty.csv"):
     for _ in range(exact_duplicates_count):
         rows.append(random.choice(rows).copy())
         
-    # Xáo trộn lại danh sách một chút cho các dòng trùng lặp nằm rải rác thực tế hơn
+    # Xáo trộn lại danh sách cho các dòng trùng lặp nằm rải rác
     random.shuffle(rows)
         
     with open(filename, 'w', newline='', encoding='utf-8') as f:
