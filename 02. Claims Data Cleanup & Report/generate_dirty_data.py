@@ -11,7 +11,6 @@ def generate_dirty_dataset(filename="claims_dirty.csv"):
     diagnoses_pool = ["Flu", "Acute bronchitis", "Gastritis", "Migraine", "Back pain", "Appendicitis", "Allergy", "Toothache"]
     claim_types_pool = ["OUTPATIENT", "INPATIENT", "DENTAL"]
     statuses_pool = ["APPROVED", "REJECTED", "PENDING", "IN_REVIEW"]
-    
     header = ["claim_id", "policy_id", "member_name", "claim_type", "diagnosis", "submitted_amount", "currency", "submitted_date", "status"]
     
     # Định nghĩa trước số lượng dòng trùng lặp và dòng lỗi để khống chế tổng 500 dòng
@@ -75,9 +74,9 @@ def generate_dirty_dataset(filename="claims_dirty.csv"):
         writer.writerow(header)
         writer.writerows(rows)
 
-    print(f"[System] Successfully generated raw dirty dataset: {filename}")
-    print(f" -> Total rows in file (including Header): {len(rows) + 1} rows.")
-    print(f" -> Actual data rows: {len(rows)} rows.")
+    print(f"[Hệ thống] Đã sinh xong file dữ liệu thô: {filename}")
+    print(f" -> Tổng số dòng trong file (tính cả Tiêu đề): {len(rows) + 1} dòng.")
+    print(f" -> Số dòng dữ liệu thực tế: {len(rows)} dòng.")
 
 if __name__ == "__main__":
     generate_dirty_dataset()

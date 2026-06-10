@@ -18,7 +18,7 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
             header = next(reader)
             raw_rows = list(reader)
     except FileNotFoundError:
-        print(f"[Error] Không tìm thấy file {input_file}! Vui lòng chạy file 'generate_dirty_data.py' trước.")
+        print(f"[Lỗi] Không tìm thấy file {input_file}! Vui lòng chạy file 'generate_dirty_data.py' trước.")
         return
         
     total_rows_before = len(raw_rows)
@@ -35,7 +35,7 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
     }
     
     # -------------------------------------------------------------------------
-    # BƯỚC 1: QUÉT VÀ ĐẾM TOÀN BỘ LỖI TRÊN FILE THÔ (Dành riêng cho Báo cáo Chất lượng)
+    # BƯỚC 1: QUÉT VÀ ĐẾM TOÀN BỘ LỖI TRÊN FILE THÔ
     # -------------------------------------------------------------------------
     for row in raw_rows:
         claim_id, policy_id, member_name, claim_type, diagnosis, submitted_amount, currency, submitted_date, status = row
@@ -157,32 +157,61 @@ def clean_and_report_claims(input_file="claims_dirty.csv", output_file="claims_c
     top_5_diagnoses = sorted(diagnosis_counter.items(), key=lambda x: x[1], reverse=True)[:5]
     
     # =========================================================================
-    # IN BÁO CÁO CHẤT LƯỢNG DỮ LIỆU (DATA QUALITY REPORT)
+    # TỪ ĐIỂN VIỆT HOÁ THÔNG TIN LỖI
     # =========================================================================
-    print("\n" + "="*60)
-    print("           INSURANCE CLAIMS DATA QUALITY REPORT")
-    print("="*60)
-    print(f"Total Rows Before Cleaning   : {total_rows_before}")
-    print(f"Total Rows After Cleaning    : {total_rows_after}")
-    print(f"Exact Duplicate Rows Removed : {duplicates_removed}")
-    print("-"*60)
-    print("COUNT OF ROWS WITH EACH TYPE OF ISSUE FOUND:")
+    vietnamese_issues = {
+        "Missing claim_id or policy_id": "Thiếu mã claim_id hoặc policy_id",
+        "Inconsistent casing in member_name": "Tên thành viên viết hoa thường lộn xộn",
+        "Typos or non-standard claim_type": "Sai chính tả / sai định dạng loại hình khám",
+        "Missing or N/A diagnosis": "Thiếu thông tin chẩn đoán bệnh",
+        "Invalid submitted_amount (Negative, Zero, or String format)": "Số tiền không hợp lệ (âm, bằng 0 hoặc sai kiểu chuỗi)",
+        "Non-standard currency code": "Sai mã tiền tệ (không viết hoa hoặc dùng chữ BAHT)",
+        "Non-ISO submitted_date format fixed": "Sai định dạng ngày tháng (đã chuẩn hóa về ISO)"
+    }
+
+    vietnamese_status = {
+        "APPROVED": "ĐÃ DUYỆT",
+        "DENIED": "TỪ CHỐI",
+        "PARTIALLY_COVERED": "DUYỆT MỘT PHẦN"
+    }
+
+    vietnamese_types = {
+        "OUTPATIENT": "NGOẠI TRÚ (OUTPATIENT)",
+        "INPATIENT": "NỘI TRÚ (INPATIENT)",
+        "DENTAL": "NHA KHOA (DENTAL)",
+        "UNKNOWN": "CHƯA XÁC ĐỊNH (UNKNOWN)"
+    }
+
+    # =========================================================================
+    # IN BÁO CÁO CHẤT LƯỢNG DỮ LIỆU
+    # =========================================================================
+    print("\n" + "="*65)
+    print("               BÁO CÁO CHẤT LƯỢNG DỮ LIỆU BỒI THƯỜNG")
+    print("="*65)
+    print(f"Tổng số dòng ban đầu          : {total_rows_before}")
+    print(f"Tổng số dòng sau khi xử lý    : {total_rows_after}")
+    print(f"Số dòng trùng lặp đã loại bỏ  : {duplicates_removed}")
+    print("-"*65)
+    print("THỐNG KÊ CÁC LỖI DỮ LIỆU PHÁT HIỆN:")
     for issue_name, count in issue_counts.items():
-        print(f" • {issue_name}: {count}")
-    print("-"*60)
-    print("SUMMARY STATISTICS (TOTAL CLAIMS & AVG AMOUNT BY TYPE):")
+        vn_issue = vietnamese_issues.get(issue_name, issue_name)
+        print(f" • {vn_issue}: {count} dòng")
+    print("-"*65)
+    print("THỐNG KÊ THEO LOẠI HÌNH KHÁM (SỐ CA & SỐ TIỀN TRUNG BÌNH):")
     for c_type, data in stats_by_type.items():
         avg_amount = data["total_amt"] / data["count"]
-        print(f" • {c_type}: Total Claims = {data['count']}, Avg Amount = {avg_amount:,.2f}")
-    print("-"*60)
-    print("CLAIMS COUNT BY STATUS:")
+        vn_type = vietnamese_types.get(c_type, c_type)
+        print(f" • {vn_type}: Số ca = {data['count']}, Trung bình = {avg_amount:,.2f} THB")
+    print("-"*65)
+    print("THỐNG KÊ THEO TRẠNG THÁI HỒ SƠ:")
     for stat, count in stats_by_status.items():
-        print(f" • {stat}: {count}")
-    print("-"*60)
-    print("TOP 5 MOST COMMON DIAGNOSES:")
+        vn_status = vietnamese_status.get(stat, stat)
+        print(f" • {vn_status}: {count} ca")
+    print("-"*65)
+    print("TOP 5 CHẨN ĐOÁN BỆNH PHỔ BIẾN NHẤT:")
     for idx, (diag, count) in enumerate(top_5_diagnoses, 1):
-        print(f"  {idx}. {diag} ({count} occurrences)")
-    print("="*60 + "\n")
+        print(f"  {idx}. {diag}: {count} ca")
+    print("="*65 + "\n")
 
 if __name__ == "__main__":
     clean_and_report_claims()
