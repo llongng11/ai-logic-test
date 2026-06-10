@@ -10,7 +10,7 @@ def main():
     with open("expenses.json", "r", encoding="utf-8") as f:
         expenses_data = json.load(f)
         
-    # 3. Khởi chạy Cỗ máy tính toán
+    # 3. Khởi chạy Calculator
     calculator = PolicyBenefitsCalculator(policy_data)
     processed_results = calculator.process_expenses(expenses_data)
     
