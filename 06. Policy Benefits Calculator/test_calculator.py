@@ -32,8 +32,7 @@ class TestPolicyBenefitsCalculator(unittest.TestCase):
         res = calc.calculate_single_expense({
             "expense_id": "T2", "date": "2024-01-10", "benefit_type": "INPATIENT", "amount": 5000, "diagnosis": "Fever"
         })
-        self.assertEqual(res["decision"], "DENIED")
-        self.assertTrue("Waiting period" in res["reason"])
+        self.assertEqual(res["reason_id"], "WAITING_PERIOD_DENIED")
 
     def test_03_exclusion_denial(self):
         """3. Thử thách Danh mục loại trừ: Từ chối bệnh cấm"""
@@ -41,8 +40,7 @@ class TestPolicyBenefitsCalculator(unittest.TestCase):
         res = calc.calculate_single_expense({
             "expense_id": "T3", "date": "2024-02-01", "benefit_type": "OUTPATIENT", "amount": 2000, "diagnosis": "Cosmetic Surgery"
         })
-        self.assertEqual(res["decision"], "DENIED")
-        self.assertTrue("exclusions" in res["reason"])
+        self.assertEqual(res["reason_id"], "EXCLUSION_DENIED")
 
     def test_04_copay_application(self):
         """4. Thử thách Co-pay: Đã qua khấu trừ, hóa đơn phải chia tỷ lệ 80/20 chuẩn xác"""

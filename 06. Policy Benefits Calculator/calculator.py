@@ -34,28 +34,33 @@ class PolicyBenefitsCalculator:
             "copay_amount": 0,
             "member_pays": amount,
             "decision": "DENIED",
+            "reason_id": "DEFAULT_DENIED",  # Quản lý mã lỗi cố định
             "reason": "",
             "remaining_annual_limit": int(self.remaining_annual_limit)
         }
 
         # 🚪 CỬA 1: KIỂM TRA DANH MỤC LOẠI TRỪ & THỜI GIAN CHỜ
         if diagnosis in self.exclusions:
-            res["reason"] = f"Denied: Diagnosis '{diagnosis}' is in policy exclusions."
+            res["reason_id"] = "EXCLUSION_DENIED"
+            res["reason"] = f"[Từ chối] Chẩn đoán '{diagnosis}' nằm trong danh mục loại trừ của hợp đồng."
             return res
 
         if b_type not in self.benefits:
-            res["reason"] = f"Denied: Benefit type '{b_type}' is not covered."
+            res["reason_id"] = "BENEFIT_TYPE_NOT_COVERED"
+            res["reason"] = f"[Từ chối] Quyền lợi nhóm '{b_type}' không được hỗ trợ trong gói bảo hiểm này."
             return res
 
         b_config = self.benefits[b_type]
         days_elapsed = (exp_date - self.effective_date).days
         if days_elapsed < b_config["waiting_period_days"]:
-            res["reason"] = f"Denied: Waiting period for {b_type} is {b_config['waiting_period_days']} days (Only {days_elapsed} days elapsed)."
+            res["reason_id"] = "WAITING_PERIOD_DENIED"
+            res["reason"] = f"[Từ chối] Thời gian chờ cho nhóm {b_type} là {b_config['waiting_period_days']} ngày (Hiện mới trải qua {days_elapsed} ngày)."
             return res
 
         # 🚪 CỬA 2: KIỂM TRA HẠN MỨC NĂM CÒN LẠI (Nếu cạn về 0 thì khóa sổ)
         if self.remaining_annual_limit <= 0:
-            res["reason"] = "Denied: Annual policy limit has been fully exhausted."
+            res["reason_id"] = "ANNUAL_LIMIT_EXHAUSTED"
+            res["reason"] = "[Từ chối] Hạn mức chi trả tối đa theo năm của hợp đồng đã cạn kiệt hoàn toàn."
             return res
 
         current_base = amount
@@ -76,7 +81,8 @@ class PolicyBenefitsCalculator:
         # Nếu toàn bộ số tiền hóa đơn bị nuốt gọn bởi mức khấu trừ
         if current_base == 0:
             res["decision"] = "PARTIALLY_COVERED" if amount > member_deductible_share else "DENIED"
-            res["reason"] = f"Applied to Deductible: Member pays {member_deductible_share} THB."
+            res["reason_id"] = "DEDUCTIBLE_ABSORBED"
+            res["reason"] = f"[Khấu trừ đầu năm] Khách hàng tự thanh toán {member_deductible_share:,} THB để tích lũy mức khấu trừ."
             res["member_pays"] = amount
             return res
 
@@ -117,18 +123,30 @@ class PolicyBenefitsCalculator:
         else:
             res["decision"] = "FULLY_COVERED"
 
-        # Tổng hợp lý do viết bằng ngôn ngữ con người
+        # Định vị Mã ID xử lý tổng hợp chính dựa trên kịch bản dòng tiền đi qua
+        if reduced_by_annual:
+            res["reason_id"] = "ANNUAL_LIMIT_CAPPED"
+        elif reduced_by_visit and copay_money > 0:
+            res["reason_id"] = "VISIT_LIMIT_AND_COPAY_APPLIED"
+        elif reduced_by_visit:
+            res["reason_id"] = "VISIT_LIMIT_CAPPED"
+        elif copay_money > 0:
+            res["reason_id"] = "COPAY_APPLIED"
+        else:
+            res["reason_id"] = "STANDARD_FULLY_COVERED"
+
+        # Text hỗ trợ log
         reasons = []
         if member_deductible_share > 0:
-            reasons.append(f"Deductible satisfied: {int(member_deductible_share)} THB.")
+            reasons.append(f"Tích lũy khấu trừ đạt chỉ tiêu thêm {int(member_deductible_share):,} THB.")
         if reduced_by_visit:
-            reasons.append(f"Capped at visit limit: {visit_limit} THB.")
+            reasons.append(f"Chạm trần giới hạn lần khám (Giữ lại tối đa {visit_limit:,} THB để tính tiền).")
         if copay_money > 0:
-            reasons.append(f"{int(copay_pct*100)}% copay applied.")
+            reasons.append(f"Áp dụng đồng chi trả {int(copay_pct*100)}%.")
         if reduced_by_annual:
-            reasons.append("Reduced to match remaining annual limit.")
+            reasons.append("Cắt giảm chi trả do quỹ bảo hiểm năm sắp cạn kiệt.")
         if not reasons:
-            reasons.append("Fully covered under standard benefits.")
+            reasons.append("Chi trả trọn gói theo điều khoản tiêu chuẩn.")
 
         res["covered_amount"] = int(insurance_share)
         res["copay_amount"] = int(copay_money)

@@ -14,25 +14,35 @@ def main():
     calculator = PolicyBenefitsCalculator(policy_data)
     processed_results = calculator.process_expenses(expenses_data)
     
+    ## Từ điển việt hoá thông tin
+    vietnamese_decision = {
+        "FULLY_COVERED": "CHẤP THUẬN TOÀN BỘ (FULLY_COVERED)",
+        "PARTIALLY_COVERED": "CHẤP THUẬN MỘT PHẦN (PARTIALLY_COVERED)",
+        "DENIED": "TỪ CHỐI (DENIED)"
+    }
+    
     # 4. In bảng log kết quả ra màn hình terminal
     print("\n" + "="*85)
-    print("                 PAPAYA INSURANCE - AUTOMATED CLAIMS ENGINE LOG")
+    print("             BẢO HIỂM PAPAYA - NHẬT KÝ HỆ THỐNG XỬ LÝ BỒI THƯỜNG TỰ ĐỘNG")
     print("="*85)
     
     for res in processed_results:
-        print(f"[{res['expense_id']}] Submitted: {res['submitted_amount']} THB | Covered: {res['covered_amount']} THB | Member Pays: {res['member_pays']} THB")
-        print(f"  -> Decision: {res['decision']}")
-        print(f"  -> Explanation Reason: {res['reason']}")
-        print(f"  -> Remaining Policy Annual Limit: {res['remaining_annual_limit']} THB")
+        vn_decision = vietnamese_decision.get(res['decision'], res['decision'])
+        
+        print(f"[{res['expense_id']}] Số tiền nộp: {res['submitted_amount']:,} THB | Bảo hiểm trả: {res['covered_amount']:,} THB | Khách trả: {res['member_pays']:,} THB")
+        print(f"  -> Quyết định: {vn_decision}")
+        print(f"  -> Mã nghiệp vụ (Reason ID): {res['reason_id']}")
+        print(f"  -> Lý do chi tiết: {res['reason']}")
+        print(f"  -> Hạn mức năm còn lại của hợp đồng: {res['remaining_annual_limit']:,} THB")
         print("-" * 85)
         
     summary = calculator.get_summary()
     print("\n" + "="*85)
-    print("                       FINAL POLICY BENEFIT SUMMARY REPORT")
+    print("                       BÁO CÁO TỔNG KẾT QUYỀN LỢI HỢP ĐỒNG CUỐI NĂM")
     print("="*85)
-    print(f" • Remaining Annual Policy Balance : {summary['remaining_annual_limit']} THB")
-    print(f" • Accumulated Member Deductible   : {summary['accumulated_deductible']}/1000 THB")
-    print(f" • Deductible Status Satisfied     : {summary['deductible_satisfied']}")
+    print(f" • Hạn mức quỹ bảo hiểm còn lại cuối năm : {summary['remaining_annual_limit']:,} THB")
+    print(f" • Mức khấu trừ đã tích lũy của khách    : {summary['accumulated_deductible']:,}/1,000 THB")
+    print(f" • Trạng thái hoàn thành mức khấu trừ    : {'ĐÃ ĐẠT CHỈ TIÊU' if summary['deductible_satisfied'] else 'CHƯA ĐỦ'}")
     print("="*85 + "\n")
 
 if __name__ == "__main__":
