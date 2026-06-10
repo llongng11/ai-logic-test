@@ -33,12 +33,11 @@ Tổng thời gian hoàn thành: ~3 giờ
 ## Phân tích và xây dựng thuật toán chuẩn hoá:
 
 - Trong giai đoạn chuẩn hoá này, tôi chia làm 3 bài toán tách bạch và cần được giải quyết theo thứ tự như sau:
-
-1.  Trong tập dữ liệu thô ban đầu, phải đếm và thống kê được tất cả lỗi dữ liệu có thể phát hiện.
-2.  Thực hiện chuẩn hoá dữ liệu, những dòng lỗi sẽ được chuẩn hoá và giữ lại, hoặc loại bỏ tuỳ theo loại lỗi.
-3.  Dựa trên tập dữ liệu mới sau khi được chuẩn hoá ở bước 2:
-    - Những dòng được phát hiện trùng lặp sẽ được loại bỏ theo quy tắc giữ dòng trước, bỏ dòng sau.
-    - Những dòng còn lại sẽ được áp dụng để thực hiện các thống kê theo loại hình khám, thống kê theo trạng thái hồ sơ, top 5 chấn đoán bệnh phổ biến nhất.
+  1.  Trong tập dữ liệu thô ban đầu, phải đếm và thống kê được tất cả lỗi dữ liệu có thể phát hiện.
+  2.  Thực hiện chuẩn hoá dữ liệu, những dòng lỗi sẽ được chuẩn hoá và giữ lại, hoặc loại bỏ tuỳ theo loại lỗi.
+  3.  Dựa trên tập dữ liệu mới sau khi được chuẩn hoá ở bước 2:
+      - Những dòng được phát hiện trùng lặp sẽ được loại bỏ theo quy tắc giữ dòng trước, bỏ dòng sau.
+      - Những dòng còn lại sẽ được áp dụng để thực hiện các thống kê theo loại hình khám, thống kê theo trạng thái hồ sơ, top 5 chấn đoán bệnh phổ biến nhất.
 
 - Vì sao sau khi chuẩn hoá dữ liệu mới tiến hành xoá bỏ những dòng trùng lặp?
   - Vì tồn tại một bài toán "trùng lặp ẩn", lấy ví dụ có hai giá trị chuỗi là "a" và "A". Trước khi chuẩn hoá, ta mặc định xem hai giá trị này là "không trùng lặp". Tuy nhiên sau khi chuẩn hoá về một chuẩn nào đó, hai giá trị chuỗi này sẽ giống nhau, lúc này sự trùng lặp mới xuất hiện.
