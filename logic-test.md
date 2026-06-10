@@ -86,9 +86,9 @@ Bí kíp đổ xăng nhanh, hợp lý và tránh làm phiền thiên hạ (Đọ
 - Sau đó, từ từ di chuyển ra khỏi cây xăng để tránh trơn trượt, va chạm.
 
 * Lưu ý:
-- Khi đi học, đi làm hằng ngày: Quan sát khi kim xăng còn khoảng 1 đến 2 vạch thì đổ từ 70 - 100 ngàn là đủ. Không cần đổ đầy bình vừa tránh nặng xe, hại máy mà vừa làm mất thời gian của mình và người khác.
-- Khi chuẩn bị đi xa, lúc này mới cần đổ giá cao hơn (khoảng 120 - 150 ngàn). Trường hợp vào thời gian ban ngày, cây xăng vắng khách thì có thể gọi đổ đầy bình (ban đêm nhân viên không canh được nên phần lớn họ sẽ từ chối).
-- Tuyệt đối không hút thuốc, dù là ở trong hay phía ngoài khu vực đổ xăng.
+   - Khi đi học, đi làm hằng ngày: Quan sát khi kim xăng còn khoảng 1 đến 2 vạch thì đổ từ 70 - 100 ngàn là đủ. Không cần đổ đầy bình vừa tránh nặng xe, hại máy mà vừa làm mất thời gian của mình và người khác.
+   - Khi chuẩn bị đi xa, lúc này mới cần đổ giá cao hơn (khoảng 120 - 150 ngàn). Trường hợp vào thời gian ban ngày, cây xăng vắng khách thì có thể gọi đổ đầy bình (ban đêm nhân viên không canh được nên phần lớn họ sẽ từ chối).
+   - Tuyệt đối không hút thuốc, dù là ở trong hay phía ngoài khu vực đổ xăng.
 
 ### Q4 - Lần cuối bạn bỏ quên một món đồ là khi nào? Đồ gì? [Memory, Observation]
 
